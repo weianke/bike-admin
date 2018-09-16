@@ -4,5 +4,5 @@ import './index.css';
 import Life from './pages/demo/life';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render( < Life / > , document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
