@@ -2,19 +2,41 @@ import React from 'react'
 import { Row, Col } from 'antd';
 import './index.less'
 import Util from '../../utils/utils'
+import axios from '../../axios/index'
 export default class Header extends React.Component{
-    state = {}
+
     componentWillMount(){
       this.setState({
         userName: '安可'
       })
       setInterval(() => {
         let sysTime = Util.formateDate(new Date().getTime());
-        console.log(sysTime)
+
         this.setState({
             sysTime
         })
       }, 1000);
+      this.getWeatherAPIData();
+    }
+
+    getWeatherAPIData(){
+      let city = '北京';
+        axios.jsonp({
+          url: 'http://api.map.baidu.com/telematics/v3/weather?location='+encodeURIComponent(city)+'&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'
+        }).then((res)=>{
+          // console.log(res)
+          if (res.status === 'success') {
+            let data = res.results[0].weather_data[0];
+            let PM = res.results[0].pm25;
+            this.setState({
+              dayPicture: data.dayPictureUrl,
+              weather: data.weather,
+              temperature: data.temperature,
+              wind: data.wind,
+              pmValue: PM
+            })
+          }
+        })
     }
     render(){
         return (
@@ -22,7 +44,7 @@ export default class Header extends React.Component{
               <Row className="header-top">
                   <Col span="24">
                       <span>欢迎，{this.state.userName}</span>
-                      <a href="javascript:void(0)">退出</a>
+                      <a href="">退出</a>
                   </Col>
               </Row>
               <Row className="breadcrumb">
@@ -31,7 +53,15 @@ export default class Header extends React.Component{
                   </Col>
                    <Col span="20" className="weather">
                      <span className="date">{this.state.sysTime}</span>
-                     <span className="weather-detail">晴转多云</span>
+                     <span className="weather-img">
+                        <img src={this.state.dayPicture} alt=""/>
+                     </span>
+                     <span className="weather-PM">
+                            PM2.5: {this.state.pmValue}                       
+                     </span>
+                     <span className="weather-detail">
+                            {this.state.weather}   ~  {this.state.temperature} 风速：{this.state.wind}                
+                     </span>
                   </Col>
               </Row>
             </div>
