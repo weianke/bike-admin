@@ -60,7 +60,7 @@ export default class Header extends React.Component{
                             PM2.5: {this.state.pmValue}                       
                      </span>
                      <span className="weather-detail">
-                            {this.state.weather}   ~  {this.state.temperature} 风速：{this.state.wind}                
+                            {this.state.weather}   ~  {this.state.temperature}   {this.state.wind}                
                      </span>
                   </Col>
               </Row>
