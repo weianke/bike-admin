@@ -15,6 +15,12 @@ export default class Buttons extends React.Component{
         })
     }
 
+    handleChange = (e) => {
+      console.log(e)
+        this.setState({
+          size: e.target.value
+        })
+    }
     render(){
       return (
           <div>
@@ -47,14 +53,16 @@ export default class Buttons extends React.Component{
                 </Button.Group>
             </Card>
              <Card title="按钮尺寸" className="card-wrap">
-              <Radio.Group>
+              <Radio.Group value={this.state.size}  onChange={this.handleChange}>
                  <Radio value="small">小</Radio>
                  <Radio value="default">中</Radio>
                  <Radio value="large">大</Radio>
               </Radio.Group>
               <Button type="primary" size={this.state.size}>确定</Button>
+              <Button type="primary" size={this.state.size}>确定</Button>
+              <Button type="primary" size={this.state.size}>确定</Button>
             </Card>
           </div>
       );
     }
-}
+} 
