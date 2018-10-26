@@ -21,7 +21,7 @@ const menuList = [
             },
             {
                 title: '通知提醒',
-                key: '/ui/notification',
+                key: '/admin/ui/notification',
             },
             {
                 title: '全局Message',
