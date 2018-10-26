@@ -25,19 +25,19 @@ const menuList = [
             },
             {
                 title: '全局Message',
-                key: '/ui/messages',
+                key: '/admin/ui/messages',
             },
             {
                 title: 'Tab页签',
-                key: '/ui/tabs',
+                key: '/admin/ui/tabs',
             },
             {
                 title: '图片画廊',
-                key: '/ui/gallery',
+                key: '/admin/ui/gallery',
             },
             {
                 title: '轮播图',
-                key: '/ui/carousel',
+                key: '/admin/ui/carousel',
             }
         ]
     },
