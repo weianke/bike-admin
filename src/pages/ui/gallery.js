@@ -10,10 +10,35 @@ export default class Gallery extends React.Component{
             ['11.png','12.png','13.png','14.png','15.png'],
             ['16.png','17.png','18.png','19.png','20.png'],
             ['21.png','22.png','23.png','24.png','25.png']
-        ]
+        ];
+        const imgList = imgs.map((list)=> list.map((item) =>
+            <Card
+                 cover={<img src={'/gallery/' + item} />}
+            >
+                 <Card.Meta  
+                      title="Bike Admin"
+                      description="I Love anke"/>
+            </Card>
+        ))
         return(
             <div>
-                <Row></Row> 
+                <Row>
+                    <Col md={5}>
+                        {imgList[0]}
+                    </Col>   
+                    <Col md={5}>
+                        {imgList[1]}
+                    </Col> 
+                    <Col md={5}>
+                        {imgList[2]}
+                    </Col> 
+                    <Col md={5}>
+                        {imgList[3]}
+                    </Col> 
+                    <Col md={4}>
+                        {imgList[4]}
+                    </Col>    
+                </Row> 
             </div>
         );
     }
