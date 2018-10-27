@@ -1,7 +1,18 @@
 import React from 'react'
-import {Card, Row, Col} from 'antd'
+import {Card, Row, Col, Modal} from 'antd'
 
 export default class Gallery extends React.Component{
+
+    state = {
+        visible: false
+    }
+    openGallery = (imgSrc) => {
+        this.setState({
+            visible: true,
+            currentImg:'/gallery/' +  imgSrc,
+            imgName: imgSrc
+        })
+    }
 
     render(){
         const imgs = [
@@ -13,7 +24,8 @@ export default class Gallery extends React.Component{
         ];
         const imgList = imgs.map((list)=> list.map((item) =>
             <Card
-                 cover={<img src={'/gallery/' + item} />}
+                 style={{marginBottom: 10}}
+                 cover={<img src={'/gallery/' + item}  onClick={() => this.openGallery(item)}/>}
             >
                  <Card.Meta  
                       title="Bike Admin"
@@ -22,7 +34,7 @@ export default class Gallery extends React.Component{
         ))
         return(
             <div>
-                <Row>
+                <Row gutter={10}>
                     <Col md={5}>
                         {imgList[0]}
                     </Col>   
@@ -39,6 +51,19 @@ export default class Gallery extends React.Component{
                         {imgList[4]}
                     </Col>    
                 </Row> 
+                <Modal  title={this.state.imgName}
+                        width={300}
+                        height={500}
+                        visible={this.state.visible}
+                        onCancel={() => {
+                            this.setState({
+                                visible: false
+                            })
+                        }}
+                        footer={null}
+                        >
+                   <img src={this.state.currentImg}  style={{width: '100%'}}/>
+                </Modal>   
             </div>
         );
     }
