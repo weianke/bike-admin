@@ -14,13 +14,17 @@ export default class Carousels extends React.Component{
                             <div><h3>Ant Motion Banner - Angular</h3></div>
                         </Carousel>
                 </Card>
-                <Card className="card-wrap" title="图片背景轮播">
-                        <Carousel autoplay effect="fade">
+                <Card className="card-wrap slide-wrap" title="图片背景轮播">
+                        <Carousel autoplay>
                             <div>
-                                <img src=""/>
+                                <img src="/carousel-img/carousel-1.jpg"/>
                             </div>
-                            <div><h3>Ant Motion Banner - Vue</h3></div>
-                            <div><h3>Ant Motion Banner - Angular</h3></div>
+                            <div>
+                               <img src="/carousel-img/carousel-2.jpg"/>
+                            </div>
+                            <div>
+                               <img src="/carousel-img/carousel-3.jpg"/>
+                            </div>
                         </Carousel>
                 </Card>
             </div>
