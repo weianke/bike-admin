@@ -65,7 +65,7 @@ class FormLogin extends React.Component{
                       {
                               getFieldDecorator('remember',{
                                   valuePropName: 'checked',
-                                  initialValue: false
+                                  initialValue: true
                               })( <Checkbox>记住密码</Checkbox>  )
                           }
                           <a>忘记密码</a>
