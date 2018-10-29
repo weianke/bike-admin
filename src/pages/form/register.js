@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Form , Buuton, Input, Checkbox, Radio, Select, Switch, DatePicker, TimePicker, Upload, Icon, message, InputNumber } from 'antd'
+import moment from 'moment'
 import './../ui/ui.less'
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -99,7 +100,26 @@ class FormRegister extends React.Component{
                                  </Select> 
                               )
                           }
-                </FormItem>                            
+                </FormItem>    
+                <FormItem label="是否已婚" {...formItemLayout}>
+                      {
+                              getFieldDecorator('isMarried', {
+                                  valuePropName: 'checked',
+                                  initialValue: true
+                              })( 
+                                  <Switch />  
+                              )
+                          }
+                </FormItem>     
+                <FormItem label="日期" {...formItemLayout}>
+                      {
+                              getFieldDecorator('date', {
+                                  initialValue: moment('2018-10-29')
+                              })( 
+                                  <DatePicker />  
+                              )
+                          }
+                </FormItem>                        
               </Form>
             </Card>
           </div>
