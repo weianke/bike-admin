@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Form , Buuton, Input, Checkbox, Radio, Select, Switch, DatePicker, TimePicker, Upload, Icon, message, InputNumber } from 'antd'
+import { Card, Form , Button, Input, Checkbox, Radio, Select, Switch, DatePicker, TimePicker, Upload, Icon, InputNumber } from 'antd'
 import moment from 'moment'
 import './../ui/ui.less'
 const FormItem = Form.Item;
@@ -10,6 +10,11 @@ const TextArea = Input.TextArea;
 class FormRegister extends React.Component{
        
       state={}
+
+      handleSubmit = () => {
+          let userInfo = this.props.form.getFieldsValue();
+          console.log(userInfo)
+      }
 
       getBase64 = (img, callback) => {
         const reader = new FileReader();
@@ -43,6 +48,15 @@ class FormRegister extends React.Component{
             sm: 12
         }
       }
+      const offsetLayout = {
+        wrapperCol: {
+          xs: 24,
+          sm: {
+              span: 12, 
+              offset:4
+          }
+        }
+      }
        return(
           <div>
             <Card title="注册表单">
@@ -73,7 +87,7 @@ class FormRegister extends React.Component{
                               getFieldDecorator('userPwd',{
                                   initialValue: '',
                                   rules: []
-                              })( <Input  placeholder="请输入密码"/>  )
+                              })( <Input type="password" placeholder="请输入密码"/>  )
                           }
                 </FormItem>
                  <FormItem label="性别" {...formItemLayout}>
@@ -171,9 +185,19 @@ class FormRegister extends React.Component{
                                     showUploadList={false}
                                      action="//jsonplaceholder.typicode.com/posts/"
                                      onChange={this.handleChange}
-                              >{this.state.userImg ? <img src={this.state.userImg} /> : <Icon type="plus" />}</Upload>)
+                              >{this.state.userImg ? <img src={this.state.userImg} alt="背景图"/> : <Icon type="plus" />}</Upload>)
                           }
-                </FormItem>                                    
+                </FormItem> 
+                  <FormItem  {...offsetLayout} labelCol={{offset: 3}}>
+                      {
+                              getFieldDecorator('check', {
+                                  initialValue: ''
+                              })( <Checkbox >我已阅读过协议<a href=""></a>ant协议</Checkbox>)
+                          }
+                </FormItem>
+                 <FormItem  {...offsetLayout} labelCol={{offset: 3}}>
+                     <Button type="primary" onClick={this.handleSubmit}>注册</Button>
+                </FormItem>                                           
               </Form>
             </Card>
           </div>
