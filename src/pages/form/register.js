@@ -5,8 +5,31 @@ import './../ui/ui.less'
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
+const TextArea = Input.TextArea;
 
 class FormRegister extends React.Component{
+       
+      state={}
+
+      getBase64 = (img, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+      }
+      handleChange = (info) => {
+        if (info.file.status === 'uploading') {
+          this.setState({ loading: true });
+          return;
+        }
+        if (info.file.status === 'done') {
+          // Get this url from response in real world.
+          this.getBase64(info.file.originFileObj, imageUrl => this.setState({
+            userImg: imageUrl,
+            loading: false,
+          }));
+        }
+    }
+
 
     render(){
       const {getFieldDecorator} = this.props.form;
@@ -111,15 +134,46 @@ class FormRegister extends React.Component{
                               )
                           }
                 </FormItem>     
-                <FormItem label="日期" {...formItemLayout}>
+                <FormItem label="生日" {...formItemLayout}>
                       {
                               getFieldDecorator('date', {
-                                  initialValue: moment('2018-10-29')
+                                  initialValue: moment('2018-10-29 12:00:00')
                               })( 
-                                  <DatePicker />  
+                                  <DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>  
                               )
                           }
-                </FormItem>                        
+                </FormItem>
+                 <FormItem label="联系地址" {...formItemLayout}>
+                      {
+                              getFieldDecorator('address', {
+                                  initialValue: ''
+                              })( 
+                                  < TextArea autosize={{
+                                      minRows:4, 
+                                      maxRow: 6
+                                  }}/ >
+                              )
+                          }
+                </FormItem>
+                <FormItem label="早起时间" {...formItemLayout}>
+                      {
+                              getFieldDecorator('time', {
+                                  initialValue: ''
+                              })( <TimePicker />)
+                          }
+                </FormItem>
+                  <FormItem label="上传头像" {...formItemLayout}>
+                      {
+                              getFieldDecorator('userImg', {
+                                  initialValue: ''
+                              })( <Upload
+                                    listType="picture-card"
+                                    showUploadList={false}
+                                     action="//jsonplaceholder.typicode.com/posts/"
+                                     onChange={this.handleChange}
+                              >{this.state.userImg ? <img src={this.state.userImg} /> : <Icon type="plus" />}</Upload>)
+                          }
+                </FormItem>                                    
               </Form>
             </Card>
           </div>
