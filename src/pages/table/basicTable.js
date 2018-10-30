@@ -1,7 +1,6 @@
 import React from 'react'
 import {Card, Table} from 'antd';
-import axios from 'axios'
-
+import axios from './../../axios/index'
 export default class BasicTable extends React.Component{
 
   state={
@@ -49,9 +48,20 @@ export default class BasicTable extends React.Component{
 
   // 动态获取mock数据
   request = () => {
-      let baseUrl = 'https://www.easy-mock.com/mock/5bd7fc702f07612e0212412d/mockapi';
-      axios.get(baseUrl + '/table/list').then((res) => {
-          console.log(res)
+      axios.ajax({
+          url: '/table/list',
+          data: {
+            params: {
+                page: 1
+            }
+          }
+      }).then((res)=>{
+        console.log(res)
+        if (res.code === 0){
+            this.setState({
+              dataSource2: res.result
+            })
+        }
       })
   }
 
