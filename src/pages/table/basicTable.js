@@ -84,6 +84,13 @@ export default class BasicTable extends React.Component{
       })
   }
 
+  add = () => {
+      let item = this.state.selectedItem;
+      if (item.id) {
+        
+      }
+  }
+
   render(){
     const columns = [
       {
