@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Table} from 'antd';
+import {Card, Table, Modal} from 'antd';
 import axios from './../../axios/index'
 export default class BasicTable extends React.Component{
 
@@ -71,6 +71,19 @@ export default class BasicTable extends React.Component{
       })
   }
 
+  onRowClick = (record, index) => {
+    console.log(record, index)
+      // Modal.info({
+      //   title: '信息',
+      //   content: `用户名: ${record.userName}, 用户爱好：${record.interest}`
+      // })
+      let selectKey = [index];
+      this.setState({
+        selectedRowKeys: selectKey,
+        selectedItem: record
+      })
+  }
+
   render(){
     const columns = [
       {
@@ -134,7 +147,7 @@ export default class BasicTable extends React.Component{
     ]
     const rowSelection = {
         type: 'radio',
-
+        selectedRowKeys: this.state.selectedRowKeys
     }
     return (
         <div>
@@ -159,6 +172,13 @@ export default class BasicTable extends React.Component{
                     columns={columns}
                     dataSource={this.state.dataSource2}
                     rowSelection={rowSelection}
+                    onRow={(record, index) => {
+                      return {
+                        onClick: () => {
+                            this.onRowClick(record, index);
+                        }
+                      }                     
+                    }}
                />
             </Card>
         </div> 
