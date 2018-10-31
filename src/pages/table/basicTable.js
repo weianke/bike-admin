@@ -41,7 +41,7 @@ export default class BasicTable extends React.Component{
           },
       ];
       data.map((item, index)=>{
-        item.key = index;
+        return item.key = index;
       })
       this.setState({
          dataSource: data
@@ -62,7 +62,7 @@ export default class BasicTable extends React.Component{
         console.log(res)
         if (res.code === 0){
             res.result.map((item, index) => {
-                item.key = index;
+                 return item.key = index;
             })
             this.setState({
               dataSource2: res.result,
@@ -85,14 +85,15 @@ export default class BasicTable extends React.Component{
         selectedItem: record
       })
   }
+
   // 多选执行删除动作
   handleDelete = (() => {
-      let key = this.state.selectedRowKeys;
+      // let key = this.state.selectedRowKeys;
       let rows = this.state.selectedRows;
       // console.log(`key: ${key} row: ${JSON.stringify(rows)}`);
       let ids = [];
       rows.map((item) => {
-        ids.push(item.id);
+        return ids.push(item.id);
       })
       Modal.confirm({
         title:'删除提示',
@@ -224,13 +225,18 @@ export default class BasicTable extends React.Component{
                     columns={columns}
                     dataSource={this.state.dataSource2}
                     rowSelection={rowCheckSelection}
-                    onRow={(record, index) => {
-                      return {
-                        onClick: () => {
-                            this.onRowClick(record, index);
-                        }
-                      }                     
-                    }}
+               />
+            </Card>
+             <Card title="Mock-表格分页" style={{marginTop: 10}}>
+               <div style={{marginBottom: 10}}>
+                    <Button onClick={this.handleDelete}>删除</Button>
+               </div>
+               <Table 
+                    bordered
+                    columns={columns}
+                    dataSource={this.state.dataSource2}
+                    rowSelection={rowCheckSelection}
+                    
                />
             </Card>
         </div> 
