@@ -40,6 +40,9 @@ export default class BasicTable extends React.Component{
             time: '09:00'
           },
       ];
+      data.map((item, index)=>{
+        item.key = index;
+      })
       this.setState({
          dataSource: data
       });
@@ -58,6 +61,9 @@ export default class BasicTable extends React.Component{
       }).then((res)=>{
         console.log(res)
         if (res.code === 0){
+            res.result.map((item, index) => {
+                item.key = index;
+            })
             this.setState({
               dataSource2: res.result
             })
@@ -126,6 +132,10 @@ export default class BasicTable extends React.Component{
         dataIndex: 'time'
       }
     ]
+    const rowSelection = {
+        type: 'radio',
+
+    }
     return (
         <div>
             <Card title="基础表格">
@@ -136,11 +146,19 @@ export default class BasicTable extends React.Component{
                     pagination={false}
                />
             </Card>
-            <Card title="动态数据渲染表格" style={{marginTop: 10}}>
+            <Card title="动态数据渲染表格-Mock" style={{marginTop: 10}}>
                <Table 
                     bordered
                     columns={columns}
                     dataSource={this.state.dataSource2}
+               />
+            </Card>
+            <Card title="Mock-单选" style={{marginTop: 10}}>
+               <Table 
+                    bordered
+                    columns={columns}
+                    dataSource={this.state.dataSource2}
+                    rowSelection={rowSelection}
                />
             </Card>
         </div> 
