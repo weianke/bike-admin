@@ -317,7 +317,8 @@ export default class HightTable extends React.Component{
       {
         title: '年龄',
         width: 80,
-        dataIndex: 'age'
+        dataIndex: 'age',
+        sorter: (a, b) => a.age - b.age
       },
       {
         title: '性别',
