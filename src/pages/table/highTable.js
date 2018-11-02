@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Table, Modal, Button, message} from 'antd';
+import {Card, Table, Modal, Button, message ,Badge} from 'antd';
 import axios from './../../axios/index'
 import Utils from './../../utils/utils'
 
@@ -93,27 +93,23 @@ export default class HightTable extends React.Component{
       })
   }
 
-  // 多选执行删除动作
-  handleDelete = (() => {
-      // let key = this.state.selectedRowKeys;
-      let rows = this.state.selectedRows;
-      // console.log(`key: ${key} row: ${JSON.stringify(rows)}`);
-      let ids = [];
-      rows.map((item) => {
-        return ids.push(item.id);
-      })
-      Modal.confirm({
-        title:'删除提示',
-        content: `您确定删除这些数据吗？${ids.join()}`,
-        onOk: () => {
-            message.success('删除成功');
-            this.request();
-        },
-        onCancel: () => {
+  // 删除动作
+  handleDelete = (item) => {
+    console.log(item);
+    let id = item.id;
+    Modal.confirm({
+      title: '确认',
+      content: '您确认要删除此条数据吗',
+      onOk: () => {
+        message.success('删除成功');
+        this.request();
+      }
+    })
+  }
 
-        }
-      })
-  })
+    hanleChange = (pagination, filters, sorter) => {
+        this.setState({ sortOrder: sorter.order })
+    }
 
     render(){
         const columns = [
@@ -246,52 +242,52 @@ export default class HightTable extends React.Component{
        {
          title: '生日',
          width: 120,
-         dataIndex: 'birthday'
+         dataIndex: 'birthday2'
        },
         {
           title: '生日',
           width: 120,
-          dataIndex: 'birthday'
+          dataIndex: 'birthday3'
         },
          {
            title: '生日',
            width: 120,
-           dataIndex: 'birthday'
+           dataIndex: 'birthday4'
          },
           {
             title: '生日',
             width: 120,
-            dataIndex: 'birthday'
+            dataIndex: 'birthday5'
           },
            {
              title: '生日',
              width: 120,
-             dataIndex: 'birthday'
+             dataIndex: 'birthday6'
            },
            {
              title: '生日',
              width: 120,
-             dataIndex: 'birthday'
+             dataIndex: 'birthday7'
            },
           {
             title: '地址',
             width: 120,
-            dataIndex: 'address'
+            dataIndex: 'address8'
           },
           {
             title: '地址',
             width: 120,
-            dataIndex: 'address'
+            dataIndex: 'address188'
           },
           {
             title: '地址',
             width: 120,
-            dataIndex: 'address'
+            dataIndex: 'address8828'
           },
           {
             title: '地址',
             width: 120,
-            dataIndex: 'address'
+            dataIndex: 'address8838'
           },
           {
             title: '地址',
@@ -318,7 +314,8 @@ export default class HightTable extends React.Component{
         title: '年龄',
         width: 80,
         dataIndex: 'age',
-        sorter: (a, b) => a.age - b.age
+        sorter: (a, b) => a.age - b.age,
+        sortOrder: this.state.sortOrder
       },
       {
         title: '性别',
@@ -377,6 +374,74 @@ export default class HightTable extends React.Component{
         dataIndex: 'time'
       }
     ];
+
+    const column4 = [
+      {
+         title: 'id',
+         width: 80,
+         dataIndex: 'id'
+      },
+      {
+         title: '用户名',
+         width: 80,
+         dataIndex: 'userName'
+      },
+      {
+         title: '性别',
+         width: 80,
+         dataIndex: 'sex',
+         render(sex){
+           return sex === 1 ? '男': '女';
+         }
+      },
+      {
+         title: '状态',
+         width: 80,
+         dataIndex: 'state',
+         render(state) {
+            let config = {
+                '1': '青春年少',
+                '2': '风华浪子',
+                '3': '北大才子',
+                '4': '百度FE',
+                '5': '创业者'
+            }
+            return config[state];
+         }
+      },
+      {
+        title: '预警',
+        width: 80,
+        dataIndex: 'interest',
+        render(interest) {
+            let config = {
+                '1': <Badge status="success" text="成功" />,
+                '2': <Badge status="error" text="报错" />,
+                '3': <Badge status="default" text="正常" />,
+                '4': <Badge status="processing" text="进行中" />,
+                '5': <Badge status="warning" text="警告" />,
+            }
+            return config[interest];
+         }
+      },
+      {
+        title: '生日',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '地址',
+        width: 120,
+        dataIndex: 'address'
+      },
+      {
+        title: '操作',
+        width: 80,
+        render:(text, item, index) => {
+          return <Button size="small" onClick={(item) => {this.handleDelete(item)}}>删除</Button> 
+        }
+      }
+    ];
     const rowSelection = {
         type: 'radio',
         selectedRowKeys: this.state.selectedRowKeys
@@ -416,7 +481,15 @@ export default class HightTable extends React.Component{
                     bordered
                     columns={columns3}
                     dataSource={this.state.dataSource2}
-                    scroll={{x: 1920}}
+                    onChange={this.hanleChange}
+               />
+            </Card>
+             <Card title="操作按钮" style={{marginTop: 10}}>
+               <Table 
+                    bordered
+                    columns={column4}
+                    dataSource={this.state.dataSource2}
+                    onChange={this.hanleChange}
                />
             </Card>
           </div>
