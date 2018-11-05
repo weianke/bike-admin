@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, Button, Table, Form, Select, Modal, message} from 'antd'
 import axios from './../../axios/index'
 import Utils from './../../utils/utils'
+import './../../style/common.less'
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -131,11 +132,6 @@ export default class City extends React.Component{
               align: 'center'
             }
           ];
-          const style = {
-                background: "#ffffff",
-                border: "1px solid #e8e8e8",
-                marginTop: "-3px"
-          }
       
         return (
             <div>
@@ -145,7 +141,7 @@ export default class City extends React.Component{
                 <Card style={{marginTop:10}}>
                   <Button type="primary" onClick={this.handleOpenCity}>开通城市</Button>
                 </Card>
-                <div className="content-wrap" style={style}>
+                <div className="content-wrap">
                     <Table 
                           bordered 
                           columns={columns}
