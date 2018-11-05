@@ -96,7 +96,7 @@ export default class HightTable extends React.Component{
   // 删除动作
   handleDelete = (item) => {
     console.log(item);
-    let id = item.id;
+    // let id = item.id;
     Modal.confirm({
       title: '确认',
       content: '您确认要删除此条数据吗',
@@ -442,21 +442,7 @@ export default class HightTable extends React.Component{
         }
       }
     ];
-    const rowSelection = {
-        type: 'radio',
-        selectedRowKeys: this.state.selectedRowKeys
-    }
-    const rowCheckSelection = {
-        type: 'checkbox',
-        selectedRowKeys: this.state.selectedRowKeys,
-        onChange: (selectedRowKeys, selectedRows) => {
-        
-            this.setState({
-              selectedRowKeys,
-              selectedRows
-            })
-        }
-    }
+
       return (
           <div>
                <Card title="头部滚动表格">

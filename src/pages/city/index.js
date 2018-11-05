@@ -37,10 +37,10 @@ export default class City extends React.Component{
         })
         this.setState({
           list: list,
-          pagination: Utils.pagination(res, (current)=>{
-            _this.params.age = current;
-            _this.requestList();
-          })
+           pagination: Utils.pagination(res, (current) => {
+           _this.params.page = current;
+           _this.requestList();
+         })
         })
       })
     }
@@ -62,7 +62,7 @@ export default class City extends React.Component{
             params: cityInfo
           }
       }).then((res) => {
-        if(res.code == 0){
+        if(res.code === 0){
           message.success('开通成功');
           this.setState({
             isShowOpenCity: false
@@ -76,15 +76,18 @@ export default class City extends React.Component{
         const columns = [
             {
               title: '城市ID',
-              dataIndex: 'id'
+              dataIndex: 'id',
+              align: 'center'
             },
             {
               title: '城市名称',
-              dataIndex: 'name'
+              dataIndex: 'name',
+               align: 'center'
             },
             {
               title: '用车模式',
               dataIndex: 'mode',
+               align: 'center',
               render(mode){
                 return mode === 1 ? '停车点': '禁停区';
               }
@@ -92,17 +95,20 @@ export default class City extends React.Component{
             {
               title: '营运模式',
               dataIndex: 'op_mode',
+               align: 'center',
               render(op_mode){
                 return op_mode === 1 ? '自营': '加盟';
               }
             },
             {
               title: '授权加盟商',
-              dataIndex: 'franchisee_name'
+              dataIndex: 'franchisee_name',
+               align: 'center'
             },
             {
                title: '城市管理员',
                dataIndex: 'city_admins',
+               align: 'center',
                render(arr) {
                    return arr.map((item) => {
                      return item.user_name;
@@ -111,17 +117,26 @@ export default class City extends React.Component{
             } ,
             {
               title: '城市开通时间',
-              dataIndex: 'open_time'
+              dataIndex: 'open_time',
+              align: 'center'
             }, 
             {
               title: '操作时间',
               dataIndex: 'update_time',
+              align: 'center',
               render: Utils.formateDate
             }, {
               title: '操作人',
-              dataIndex: 'sys_user_name '
+              dataIndex: 'sys_user_name',
+              align: 'center'
             }
           ];
+          const style = {
+                background: "#ffffff",
+                border: "1px solid #e8e8e8",
+                marginTop: "-3px"
+          }
+      
         return (
             <div>
                 <Card>
@@ -130,7 +145,7 @@ export default class City extends React.Component{
                 <Card style={{marginTop:10}}>
                   <Button type="primary" onClick={this.handleOpenCity}>开通城市</Button>
                 </Card>
-                <div className="content-wrap">
+                <div className="content-wrap" style={style}>
                     <Table 
                           bordered 
                           columns={columns}
