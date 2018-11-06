@@ -12,7 +12,7 @@ export default class Common extends React.Component {
                   <Header menuType="second"/>
               </Row>
               <Row className="content">
-                {this.props.children}
+                 {this.props.children}
               </Row>
           </div>
         );
