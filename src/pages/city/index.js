@@ -28,7 +28,7 @@ export default class City extends React.Component{
         url: '/open_city',
         data: {
             params: {
-              page: this.params.state
+              page: this.params.page
             }
         }
       }).then((res) => {
