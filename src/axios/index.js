@@ -24,13 +24,13 @@ export default class Axios{
        loading = document.getElementById('ajaxLoading');
        loading.style.display = 'block';
     }
-    let baseUrl = 'https://www.easy-mock.com/mock/5bd7fc702f07612e0212412d/mockapi';
+    let baseUrl = 'https://www.easy-mock.com/mock/5bd7fc702f07612e0212412d/api';
     return new Promise((resolve, reject) => {
         axios({
             url: options.url,
             mehods: 'get',
             baseURL: baseUrl,
-            timeout: 10000,
+            // timeout: 10000,
             params: (options.data && options.data.params) || ''
         }).then((response)=> {
           if (options.data && options.data.isShowLoading !== false) {
