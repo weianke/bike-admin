@@ -1,8 +1,6 @@
 import React from 'react'
 import {Card} from 'antd'
 import axios from './../../axios/index'
-import Utils from './../../utils/utils'
-import BaseForm from '../../components/BaseForm'
 import './detail.less'
 
 
@@ -18,6 +16,7 @@ export default class Order extends React.Component {
    }
 
    getDetailInfo = (orderId) => {
+     let _this = this;
       axios.ajax({
         url: '/order/detail',
         data: {
@@ -31,8 +30,27 @@ export default class Order extends React.Component {
             this.setState({
               orderInfo: res.result
             })
+            _this.renderMap();
          }
       })
+   }
+
+   renderMap = () => {
+      this.map = new window.BMap.Map('orderDetailMap');
+      this.map.centerAndZoom('北京',11);
+      this.addMapControl();
+   }
+
+
+   // 添加地图控件
+   addMapControl = () => {
+      let map = this.map;
+      map.addControl(new window.BMap.ScaleControl({
+        anchor: window.BMAP_ANCHOR_TOP_RIGHT
+      }))
+       map.addControl(new window.BMap.NavigationControl({
+        anchor: window.BMAP_ANCHOR_BOTTOM_LEFT
+      }))
    }
 
    render(){
