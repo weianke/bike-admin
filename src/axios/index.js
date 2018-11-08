@@ -52,7 +52,7 @@ export default class Axios{
        loading.style.display = 'block';
     }
     let baseUrl = '';
-    if (options.isMock) {
+    if (options.data.isMock) {
         baseUrl = 'https://www.easy-mock.com/mock/5bd7fc702f07612e0212412d/api'
     } else {
         baseUrl = '';

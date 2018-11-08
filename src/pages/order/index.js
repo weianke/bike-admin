@@ -53,7 +53,7 @@ export default class Order extends React.Component{
     requestList = () => {
       let _this= this;
 
-      axios.requestList(this, '/order/list',this.params, true)
+      axios.requestList(this, '/order/list',this.params, true);
    
     }
 
