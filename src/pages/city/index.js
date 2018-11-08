@@ -23,27 +23,7 @@ export default class City extends React.Component{
 
     // 默认请求我们的接口数据
     requestList = () => {
-      let _this = this;
-      axios.ajax({
-        url: '/open_city',
-        data: {
-            params: {
-              page: this.params.page
-            }
-        }
-      }).then((res) => {
-        let list = res.result.item_list.map((item, index) => {
-           item.key = index;
-           return item;
-        })
-        this.setState({
-          list: list,
-           pagination: Utils.pagination(res, (current) => {
-           _this.params.page = current;
-           _this.requestList();
-         })
-        })
-      })
+      axios.requestList(this, '/open_city', this.params, true);
     }
 
     // 开通城市
