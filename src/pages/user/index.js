@@ -49,6 +49,7 @@ export default class User extends React.Component{
                 type
             })
         }else if(type=="delete"){
+          let _this = this;
             if(!item){
                 Modal.info({
                     title: '信息',
@@ -56,22 +57,23 @@ export default class User extends React.Component{
                 })
                 return;
             }
-            Utils.ui.confirm({
-                text:'确定要删除此用户吗？',
+            Modal.confirm({
+                content: '确定要删除此用户吗？',
                 onOk:()=>{
                     axios.ajax({
                         url:'/user/delete',
                         data:{
                             params:{
                                 id:item.id
-                            }
+                            },
+                            isMock: true
                         }
                     }).then((res)=>{
                         if(res.code ==0){
                             this.setState({
                                 isVisible:false
                             })
-                            this.requestList();
+                            _this.requestList();
                         }
                     })
                 }
@@ -87,7 +89,8 @@ export default class User extends React.Component{
             data:{
                 params:{
                     ...data
-                }
+                },
+                isMock: true
             }
         }).then((res)=>{
             if(res.code ==0){
@@ -172,7 +175,7 @@ export default class User extends React.Component{
                             <Button type="primary">登 录</Button>
                         </FormItem>
                     </Form>
-                </Card>...
+                </Card>
                 <Card style={{marginTop:10}}>
                     <Button type="primary" icon="plus" onClick={()=>this.handleOperator('create')}>创建员工</Button>
                     <Button icon="edit" onClick={()=>this.handleOperator('edit')}>编辑员工</Button>
