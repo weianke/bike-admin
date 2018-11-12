@@ -14,9 +14,7 @@ export default class BikeMap extends React.Component {
     }
 
     formList = [
-      {
-        type: '城市'
-      }, {
+       {
         type: '时间查询'
       },{
         type: 'SELECT',
