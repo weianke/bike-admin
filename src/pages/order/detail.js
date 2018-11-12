@@ -22,7 +22,8 @@ export default class Order extends React.Component {
         data: {
           params: {
               orderId: orderId
-          }
+          },
+          isMock: true
         }
       }).then((res) => {
         console.log(res)
