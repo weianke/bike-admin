@@ -28,13 +28,13 @@ export default class User extends React.Component{
     // 操作员工
     handleOperator = (type)=>{
         let item = this.state.selectedItem;
-        if(type =='create'){
+        if(type ==='create'){
             this.setState({
                 title:'创建员工',
                 isVisible:true,
                 type
             })
-        }else if(type=="edit" || type=='detail'){
+        }else if(type==="edit" || type==='detail'){
             if(!item){
                 Modal.info({
                     title: '信息',
@@ -43,12 +43,12 @@ export default class User extends React.Component{
                 return;
             }
             this.setState({
-                title:type=='edit'?'编辑用户':'查看详情',
+                title:type==='edit'?'编辑用户':'查看详情',
                 isVisible:true,
                 userInfo:item,
                 type
             })
-        }else if(type=="delete"){
+        }else if(type==="delete"){
           let _this = this;
             if(!item){
                 Modal.info({
@@ -81,11 +81,12 @@ export default class User extends React.Component{
         }
     }
 
+    // 创建员工提交
     handleSubmit = ()=>{
         let type = this.state.type;
         let data = this.userForm.props.form.getFieldsValue();
         axios.ajax({
-            url:type == 'create'?'/user/add':'/user/edit',
+            url:type ===  'create'?'/user/add':'/user/edit',
             data:{
                 params:{
                     ...data
