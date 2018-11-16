@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card} from 'antd'
 import ReactEcharts from 'echarts-for-react'
-import echartTheme from './../echartTheme'
+import echartTheme from './../themeLight'
 // 按需加载
 import echarts from 'echarts/lib/echarts'
 // 导入饼图
