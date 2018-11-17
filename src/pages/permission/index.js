@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, Button, Modal} from 'antd'
 import Etable from './../../components/ETable'
-
+import Utils from './../../utils/utils'
 
 export default class Permission extends React.Component {
 
