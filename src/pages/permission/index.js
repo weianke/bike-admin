@@ -1,9 +1,16 @@
 import React from 'react'
 import {Card, Button, Modal} from 'antd'
+import axios from './../../axios'
 import Etable from './../../components/ETable'
 import Utils from './../../utils/utils'
 
 export default class Permission extends React.Component {
+
+  state = {}
+  
+  componentWillMount () {
+    axios.requestList(this, '/role/list',{},true)
+  }
 
   render (){
     const columns = [
@@ -16,7 +23,7 @@ export default class Permission extends React.Component {
       },{
           title: '创建时间',
           dataIndex: 'create_time',
-          render: Utils.formatTime
+          render: Utils.formateDate
       }, {
           title: '使用状态',
           dataIndex: 'status',
@@ -30,7 +37,8 @@ export default class Permission extends React.Component {
       }, {
           title: '授权时间',
           dataIndex: 'authorize_time',
-          render: Utils.formatTime
+          width: 160,
+          render: Utils.formateDate
       }, {
           title: '授权人',
           dataIndex: 'authorize_user_name',
@@ -44,7 +52,10 @@ export default class Permission extends React.Component {
             <Button type="primary">用户授权</Button>
         </Card>
         <div className="content-wrap">
-          <Etable   columns={columns} />
+          <Etable   columns={columns}
+                    selectedRowKeys={this.state.selectedRowKeys}
+                    dataSource={this.state.list} 
+                    updateSelectedItem={Utils.updateSelectedItem.bind(this)}/>
         </div>
       </div>
     );
