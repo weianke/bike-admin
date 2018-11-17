@@ -9,7 +9,7 @@ class FormLogin extends React.Component{
         this.props.form.validateFields((err, value)=>{
             if (!err) {
                 message.success(`${userInfo.userName} 恭喜您，通过Form组件来学习  ${userInfo.userPwd}`);
-            }
+            } 
         })
     }
 
