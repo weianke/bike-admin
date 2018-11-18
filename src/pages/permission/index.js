@@ -40,6 +40,7 @@ export default class Permission extends React.Component {
                    _this.setState({
                        isRoleVisible: false
                    })
+                   _this.roleForm.props.form.resetFields();
                    axios.requestList(this, '/role/list',{},true)
                }
             })
