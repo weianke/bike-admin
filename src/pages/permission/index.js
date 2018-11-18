@@ -25,7 +25,6 @@ export default class Permission extends React.Component {
      
      this.roleForm.props.form.validateFields((error, value)=> {
         if (error) {
-            message.error('请填入用户名称');
             return ;
         } else {
             axios.ajax({
@@ -45,7 +44,7 @@ export default class Permission extends React.Component {
                }
             })
         }
-     })   
+     })
   }
 
   // 创建角色
@@ -54,6 +53,26 @@ export default class Permission extends React.Component {
           isRoleVisible: true
       })
   }
+
+  // 设置权限
+  handlePermission = () => {
+    let item = this.state.selectedItem;
+
+    if (!item ){
+        Modal.info({
+            title: '信息',
+            content: '请选择一个用户'
+        })
+        return;
+    }
+    
+    this.setState({
+        isPrmVisible: true,
+        detailInofo: item
+    })
+  }
+
+
   render (){
     const columns = [
       {
@@ -90,7 +109,7 @@ export default class Permission extends React.Component {
       <div>
         <Card>
             <Button type="primary" onClick={this.handleRole}>创建角色</Button>
-            <Button type="primary">设置权限</Button>
+            <Button type="primary" onClick={this.handlePermission}>设置权限</Button>
             <Button type="primary">用户授权</Button>
         </Card>
         <div className="content-wrap">
@@ -111,6 +130,18 @@ export default class Permission extends React.Component {
                     }}
                 >
                     <RoleForm wrappedComponentRef={(inst) => this.roleForm = inst }/>
+                </Modal>
+                <Modal title="设置权限"
+                        visible={this.state.isPrmVisible}
+                        width={600}
+                        onOk={this.handlePerEditSubmit}
+                        onCancel={()=>{
+                            this.setState({
+                                isPrmVisible: false
+                            })
+                        }}
+                >
+
                 </Modal>
       </div>
     );
