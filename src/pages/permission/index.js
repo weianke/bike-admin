@@ -45,7 +45,7 @@ export default class Permission extends React.Component {
                }
             })
         }
-     })
+     })   
   }
 
   // 创建角色
