@@ -83,6 +83,7 @@ export default class Permission extends React.Component {
           dataIndex: 'role_name'
       },{
           title: '创建时间',
+          width: 160,
           dataIndex: 'create_time',
           render: Utils.formateDate
       }, {
@@ -191,3 +192,17 @@ class RoleForm extends React.Component{
     }
 }
 RoleForm = Form.create({})(RoleForm);
+
+
+class PermEditForm extends React.Component {
+  
+  render () {
+    return (
+        <Form layout="horizontal">
+
+        </Form>
+    );
+  }
+}
+
+PermEditForm = Form.create({})(PermEditForm);
