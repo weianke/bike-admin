@@ -1,17 +1,34 @@
 import React from 'react'
 import MenuConfig from '../../config/menuConfig'
 import { Menu } from 'antd';
+import {connect} from 'react-redux'
+import {switchMenu} from './../../redux/action'
 import { NavLink } from 'react-router-dom'
 import './index.less'
 const SubMenu = Menu.SubMenu;
 
-export default class NavLeft extends React.Component {
+class NavLeft extends React.Component {
+    state={
+      currentKey: ''
+    }
     componentWillMount(){
       const menuTreeNode =  this.renderMenu(MenuConfig);
-
+      let currentKey = window.location.hash.replace(/#|\?.*$/g, '');
       this.setState({
+        currentKey,
         menuTreeNode
       })
+    }
+
+    handleClick = ({item})=> {
+      console.log(item)
+      const {dispatch} = this.props;
+       // 事件派发，自动调用reducer，通过reducer保存到store对象中
+      dispatch(switchMenu(item.props.title));
+
+      this.setState({
+        currentKey: item.key
+      }) 
     }
     // 菜单渲染
     renderMenu = (data) => {
@@ -24,7 +41,7 @@ export default class NavLeft extends React.Component {
             </SubMenu>
           )
         }
-        return <Menu.Item  key={item.key}>
+        return <Menu.Item  title={item.title} key={item.key}>
                  <NavLink to={item.key}>{item.title}</NavLink>
               </Menu.Item>
       })
@@ -36,10 +53,13 @@ export default class NavLeft extends React.Component {
                     <img src="/assets/logo-ant.svg" alt="" />
                     <h1>Bike Admin</h1>
                 </div>
-                <Menu theme="dark" mode="vertical">
+                <Menu onClick={this.handleClick} selectedKeys={this.state.currentKey}
+                      theme="dark" mode="vertical">
                    {this.state.menuTreeNode}
                 </Menu>
             </div>
         )
     }
 }
+
+export default connect()(NavLeft);
