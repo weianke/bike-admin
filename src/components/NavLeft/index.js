@@ -13,6 +13,7 @@ class NavLeft extends React.Component {
     }
     componentWillMount(){
       const menuTreeNode =  this.renderMenu(MenuConfig);
+      // 通过window对象获取当前选中的导航
       let currentKey = window.location.hash.replace(/#|\?.*$/g, '');
       this.setState({
         currentKey,
@@ -20,14 +21,15 @@ class NavLeft extends React.Component {
       })
     }
 
-    handleClick = ({item})=> {
+    handleClick = ({item, key})=> {
       console.log(item)
+      // 通过conect拿到dispatch方法
       const {dispatch} = this.props;
        // 事件派发，自动调用reducer，通过reducer保存到store对象中
       dispatch(switchMenu(item.props.title));
 
       this.setState({
-        currentKey: item.key
+        currentKey: key
       }) 
     }
     // 菜单渲染
@@ -53,7 +55,7 @@ class NavLeft extends React.Component {
                     <img src="/assets/logo-ant.svg" alt="" />
                     <h1>Bike Admin</h1>
                 </div>
-                <Menu onClick={this.handleClick} selectedKeys={this.state.currentKey}
+                <Menu onClick={this.handleClick} selectedKeys={[this.state.currentKey]}
                       theme="dark" mode="vertical">
                    {this.state.menuTreeNode}
                 </Menu>
