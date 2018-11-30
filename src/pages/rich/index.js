@@ -51,7 +51,7 @@ export default class RichText extends React.Component {
                   onEditorStateChange={this.onEditorStateChange}
                 />
         </Card>
-        <Modal title="富文本·"
+        <Modal title="富文本"
                 visible={this.state.showRichText}
                 onCancel={()=>{
                   this.setState({
