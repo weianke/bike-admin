@@ -9,7 +9,7 @@ export default class Gallery extends React.Component{
     openGallery = (imgSrc) => {
         this.setState({
             visible: true,
-            currentImg:'/gallery/' +  imgSrc,
+            currentImg:'./gallery/' +  imgSrc,
             imgName: imgSrc
         })
     }
@@ -25,7 +25,7 @@ export default class Gallery extends React.Component{
         const imgList = imgs.map((list)=> list.map((item) =>
             <Card
                  style={{marginBottom: 10}}
-                 cover={<img src={'/gallery/' + item}  onClick={() => this.openGallery(item)} alt="背景图"/>}
+                 cover={<img src={'./gallery/' + item}  onClick={() => this.openGallery(item)} alt="背景图"/>}
             >
                  <Card.Meta  
                       title="Bike Admin"
