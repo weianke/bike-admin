@@ -52,7 +52,7 @@ class NavLeft extends React.Component {
         return (
             <div>
                 <div className="logo">
-                    <img src="/assets/logo-ant.svg" alt="" />
+                    <img src="./assets/logo-ant.svg" alt="" />
                     <h1>Bike Admin</h1>
                 </div>
                 <Menu onClick={this.handleClick} selectedKeys={[this.state.currentKey]}
