@@ -63,7 +63,7 @@ export default class Gallery extends React.Component{
                         }}
                         footer={null}
                         >
-                  <LazyLoad  height={200}>
+                  <LazyLoad>
                         <img src={this.state.currentImg}  style={{width: '100%'}} alt="背景图"/>
                   </LazyLoad>
                 </Modal>   
