@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card, Row, Col, Modal} from 'antd'
-import LazyImg from 'lazy-img-react';
+import LazyLoad from 'react-lazyload';
 
 export default class Gallery extends React.Component{
 
@@ -63,8 +63,9 @@ export default class Gallery extends React.Component{
                         }}
                         footer={null}
                         >
-                   {/* <img src={this.state.currentImg}  style={{width: '100%'}} alt="背景图"/> */}
-                  <LazyImg width="100%" alt="背景图" src={this.state.currentImg}  />
+                  <LazyLoad  height={200}>
+                        <img src={this.state.currentImg}  style={{width: '100%'}} alt="背景图"/>
+                  </LazyLoad>
                 </Modal>   
             </div>
         );
